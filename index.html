@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Defense Network</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background and Body Styling */
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Main Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            background: url('GIG.jpg') center/cover no-repeat;
+            border-radius: 15px;
+            padding: 40px;
+            overflow: hidden;
+        }
+
+        /* Interactive Nodes */
+        .node {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4f4f;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite, moveNode 8s linear infinite;
+            cursor: pointer;
+        }
+
+        .node:hover {
+            background-color: #ffcccc;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+        }
+
+        /* Random Movement for Nodes */
+        @keyframes moveNode {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(50px, -30px); }
+            50% { transform: translate(-50px, 50px); }
+            75% { transform: translate(30px, -50px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* Flying Text */
+        .flying-text {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            animation: flyText 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes flyText {
+            from {
+                transform: translate(-100vw, 0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            to {
+                transform: translate(100vw, 0);
+                opacity: 0;
+            }
+        }
+
+        /* Information Modal */
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            max-width: 300px;
+            font-size: 0.9em;
+        }
+
+        .info.active {
+            display: block;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .info {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Interactive Nodes -->
+        <div class="node" style="top: 20%; left: 30%;" onclick="showInfo('Satellite Surveillance')"></div>
+        <div class="node" style="top: 40%; left: 50%;" onclick="showInfo('Naval Operations')"></div>
+        <div class="node" style="top: 70%; left: 20%;" onclick="showInfo('Air Defense')"></div>
+        <div class="node" style="top: 30%; left: 70%;" onclick="showInfo('Ground Forces')"></div>
+        <div class="node" style="top: 80%; left: 50%;" onclick="showInfo('Cyber Intelligence')"></div>
+
+        <!-- Information Modal -->
+        <div id="infoBox" class="info"></div>
+
+        <!-- Flying Text -->
+        <div class="flying-text" style="top: 10%;">Encrypted data</div>
+        <div class="flying-text" style="top: 30%;">Signal intercepted</div>
+        <div class="flying-text" style="top: 50%;">Network breach detected</div>
+        <div class="flying-text" style="top: 70%;">Data transmitted</div>
+        <div class="flying-text" style="top: 90%;">Secured transmission</div>
+    </div>
+
+    <script>
+        // Function to Show Information in the Modal
+        function showInfo(content) {
+            const infoBox = document.getElementById('infoBox');
+            infoBox.innerHTML = `<strong>${content}</strong><p>All to the system we ride gloriously thru ${content} and around.</p>`;
+            infoBox.classList.add('active');
+        }
+
+        // Close the info box when clicking outside
+        document.addEventListener('click', function(event) {
+            const infoBox = document.getElementById('infoBox');
+            if (!event.target.classList.contains('node')) {
+                infoBox.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
